@@ -57,9 +57,29 @@ arch_configs = {
             'sf': 8
 
         },
+        "M1oc": {
+            'in_channels': 3,
+            'out_channels': 1,
+            'embed_dim': 120,
+            'depths': [6, 6, 6, 6, 6],
+            'num_heads': [6, 6, 6, 6, 6],
+            'resi_connection': '1conv',
+            'sf': 8
+
+        },
         "L": {
             'in_channels': 3,
             'out_channels': 3,
+            'embed_dim': 180,
+            'depths': [6, 6, 6, 6, 6, 6, 6, 6],
+            'num_heads': [6, 6, 6, 6, 6, 6, 6, 6],
+            'resi_connection': '1conv',
+            'sf': 8
+        },
+
+        "L1oc": {
+            'in_channels': 3,
+            'out_channels': 1,
             'embed_dim': 180,
             'depths': [6, 6, 6, 6, 6, 6, 6, 6],
             'num_heads': [6, 6, 6, 6, 6, 6, 6, 6],
