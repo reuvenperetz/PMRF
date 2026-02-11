@@ -54,17 +54,19 @@ arch_configs = {
             'depths': [6, 6, 6, 6, 6],
             'num_heads': [6, 6, 6, 6, 6],
             'resi_connection': '1conv',
-            'sf': 8
+            'upsampler': '',
+            'sf': 1
 
         },
         "M1oc": {
-            'in_channels': 3,
+            'in_channels': 1,
             'out_channels': 1,
             'embed_dim': 120,
             'depths': [6, 6, 6, 6, 6],
             'num_heads': [6, 6, 6, 6, 6],
             'resi_connection': '1conv',
-            'sf': 8
+            'upsampler': '',
+            'sf': 1
 
         },
         "L": {
@@ -91,7 +93,7 @@ arch_configs = {
 
 
 def create_swinir_model(in_channels, out_channels, embed_dim, depths, num_heads, resi_connection,
-                        sf):
+                        sf, upsampler="nearest+conv"):
     return SwinIR(
         img_size=64,
         patch_size=1,
@@ -104,9 +106,9 @@ def create_swinir_model(in_channels, out_channels, embed_dim, depths, num_heads,
         mlp_ratio=2,
         sf=sf,
         img_range=1.0,
-        upsampler="nearest+conv",
+        upsampler=upsampler,
         resi_connection=resi_connection,
-        unshuffle=True,
+        unshuffle=False,
         unshuffle_scale=8
     )
 
