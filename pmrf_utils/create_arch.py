@@ -76,17 +76,19 @@ arch_configs = {
             'depths': [6, 6, 6, 6, 6, 6, 6, 6],
             'num_heads': [6, 6, 6, 6, 6, 6, 6, 6],
             'resi_connection': '1conv',
-            'sf': 8
+            'upsampler': '',
+            'sf': 1
         },
 
         "L1oc": {
-            'in_channels': 3,
+            'in_channels': 1,
             'out_channels': 1,
             'embed_dim': 180,
             'depths': [6, 6, 6, 6, 6, 6, 6, 6],
             'num_heads': [6, 6, 6, 6, 6, 6, 6, 6],
             'resi_connection': '1conv',
-            'sf': 8
+            'upsampler': '',
+            'sf': 1
         },
     },
 }
