@@ -685,7 +685,9 @@ class SwinIR(nn.Module):
         num_feat = 64
         self.img_range = img_range
         if in_chans == 3:
-            rgb_mean = (0.4488, 0.4371, 0.4040)
+            # rgb_mean = (0.4488, 0.4371, 0.4040)
+            # r_low: files=17 skipped=0 avg_per_channel=[0.6207078099250793, 0.5870176553726196, 0.5333494544029236]
+            rgb_mean = (0.6207, 0.5870, 0.5333)
             self.mean = torch.Tensor(rgb_mean).view(1, 3, 1, 1)
         else:
             self.mean = torch.zeros(1, 1, 1, 1)
@@ -809,7 +811,14 @@ class SwinIR(nn.Module):
             self.lrelu = nn.LeakyReLU(negative_slope=0.2, inplace=True)
         else:
             # for image denoising and JPEG compression artifact reduction
-            self.conv_last = nn.Conv2d(embed_dim, num_out_ch, 3, 1, 1)
+            if self.unshuffle:
+                self.conv_last = nn.Sequential(
+                    nn.Conv2d(embed_dim, num_out_ch * (sf ** 2), 3, 1, 1),
+                    nn.PixelShuffle(sf),
+                )
+            else:
+                self.conv_last = nn.Conv2d(embed_dim, num_out_ch, 3, 1, 1)
+            # self.conv_last = nn.Conv2d(embed_dim, num_out_ch, 3, 1, 1)
 
         self.apply(self._init_weights)
 
