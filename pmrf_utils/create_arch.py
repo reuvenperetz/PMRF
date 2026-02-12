@@ -97,7 +97,7 @@ arch_configs = {
 def create_swinir_model(in_channels, out_channels, embed_dim, depths, num_heads, resi_connection,
                         sf, upsampler="nearest+conv"):
     return SwinIR(
-        img_size=64,
+        img_size=256,
         patch_size=1,
         in_chans=in_channels,
         num_out_ch=out_channels,
@@ -111,7 +111,7 @@ def create_swinir_model(in_channels, out_channels, embed_dim, depths, num_heads,
         upsampler=upsampler,
         resi_connection=resi_connection,
         unshuffle=False,
-        unshuffle_scale=8
+        unshuffle_scale=1
     )
 
 
